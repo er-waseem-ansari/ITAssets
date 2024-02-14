@@ -9,7 +9,4 @@ import com.hexaware.ITAssets.entity.IssuedAsset;
 @Repository
 public interface IssuedAssetRepository extends JpaRepository<IssuedAsset, Long> {
 	
-	@Query("DELETE FROM IssuedAsset i WHERE i.assetId = ?1")
-
-	public IssuedAsset removeByAssetId(Long assetId);
 }

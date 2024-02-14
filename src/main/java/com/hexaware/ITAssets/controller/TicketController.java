@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hexaware.ITAssets.entity.Ticket;
@@ -27,5 +28,12 @@ public class TicketController {
 	@GetMapping("/raise-ticket/check")
 	public String check() {
 		return "Working";
+	}
+	
+	@PostMapping("/approveTicket")
+	public String approveTicket(@RequestParam Long ticketId)
+	{
+		return ticketService.approveTicket(ticketId);
+		
 	}
 }
