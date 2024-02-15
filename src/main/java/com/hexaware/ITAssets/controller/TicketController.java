@@ -12,7 +12,6 @@ import com.hexaware.ITAssets.entity.Ticket;
 import com.hexaware.ITAssets.service.TicketService;
 
 @RestController
-@RequestMapping("/it-assets/api/ticket")
 public class TicketController {
 	
 	@Autowired
@@ -35,5 +34,11 @@ public class TicketController {
 	{
 		return ticketService.approveTicket(ticketId);
 		
+	}
+	@PostMapping("/returnAsset")
+	public String returnTicket(@RequestParam Long ticketId)
+	{
+		ticketService.returnTicket(ticketId);
+		return "s";
 	}
 }

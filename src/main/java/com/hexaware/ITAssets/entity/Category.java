@@ -2,6 +2,8 @@ package com.hexaware.ITAssets.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,6 +28,7 @@ public class Category {
 	@Column(name="quantity")
 	private int quantity;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="category_type")
 	private type categoryType;
 

@@ -10,7 +10,6 @@ import com.hexaware.ITAssets.entity.Employee;
 import com.hexaware.ITAssets.service.EmployeeService;
 
 @RestController
-@RequestMapping("/it-assets/api/employee")
 public class EmployeeController {
 	
 	@Autowired

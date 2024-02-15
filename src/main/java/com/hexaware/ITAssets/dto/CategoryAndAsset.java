@@ -4,6 +4,7 @@ import com.hexaware.ITAssets.entity.Asset;
 import com.hexaware.ITAssets.entity.Category;
 
 public class CategoryAndAsset {
+	
 	private Category category;
 	private Asset asset;
 	public CategoryAndAsset() {

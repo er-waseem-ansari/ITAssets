@@ -46,7 +46,7 @@ public class Ticket {
 	@JoinColumn(name = "employee_id", referencedColumnName="employee_id")
 	private Employee employee;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="asset_id",referencedColumnName="asset_id")
 	private Asset asset;
 	
