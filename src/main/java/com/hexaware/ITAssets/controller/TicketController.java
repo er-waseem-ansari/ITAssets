@@ -35,10 +35,4 @@ public class TicketController {
 		return ticketService.approveTicket(ticketId);
 		
 	}
-	@PostMapping("/returnAsset")
-	public String returnTicket(@RequestParam Long ticketId)
-	{
-		ticketService.returnTicket(ticketId);
-		return "s";
-	}
 }

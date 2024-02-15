@@ -9,6 +9,5 @@ public interface TicketService {
 
 	public String approveTicket(Long ticketId);
 
-	public String returnTicket(Long ticketId);
 	
 }

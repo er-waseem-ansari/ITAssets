@@ -22,7 +22,7 @@ public class ReturnedAsset {
 	@Column(name="returned_assets_id")
 	private Long returnedAssetsId;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "asset_id", referencedColumnName = "asset_id")
 	private Asset asset;
 	
