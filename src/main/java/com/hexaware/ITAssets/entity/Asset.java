@@ -12,6 +12,12 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="assets")
 public class Asset {
+	
+	enum status{
+		AVAILABLE,
+		UNAVAILABLE
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="asset_id")
@@ -23,6 +29,8 @@ public class Asset {
 	
 	private String image;
 	
+	private status assetStatus;
+	
 	@ManyToOne
 	@JoinColumn(name="category_id", referencedColumnName="category_id")
 	private Category category;
@@ -31,14 +39,17 @@ public class Asset {
 		super();
 	}
 
-	public Asset(Long assetId, String model, String description, String image, Category category) {
+	public Asset(Long assetId, String model, String description, String image, status assetStatus, Category category) {
 		super();
 		this.assetId = assetId;
 		this.model = model;
 		this.description = description;
 		this.image = image;
+		this.assetStatus = assetStatus;
 		this.category = category;
 	}
+	
+	
 
 	public Long getAssetId() {
 		return assetId;
@@ -72,6 +83,14 @@ public class Asset {
 		this.image = image;
 	}
 
+	public status getAssetStatus() {
+		return assetStatus;
+	}
+
+	public void setAssetStatus(status assetStatus) {
+		this.assetStatus = assetStatus;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
@@ -83,8 +102,10 @@ public class Asset {
 	@Override
 	public String toString() {
 		return "Asset [assetId=" + assetId + ", model=" + model + ", description=" + description + ", image=" + image
-				+ ", category=" + category + "]";
+				+ ", assetStatus=" + assetStatus + ", category=" + category + "]";
 	}
+
+	
 	
 	
 	

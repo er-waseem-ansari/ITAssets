@@ -14,8 +14,6 @@ public class TicketDTO {
 	
 	private tickettype ticketType;
 	
-	private String problemDescription;
-	
 	private Employee employee;
 	
 	private Asset asset;
@@ -28,13 +26,6 @@ public class TicketDTO {
 		this.ticketType = ticketType;
 	}
 
-	public String getProblemDescription() {
-		return problemDescription;
-	}
-
-	public void setProblemDescription(String problemDescription) {
-		this.problemDescription = problemDescription;
-	}
 
 	public Employee getEmployee() {
 		return employee;
@@ -52,23 +43,25 @@ public class TicketDTO {
 		this.asset = asset;
 	}
 
-	public TicketDTO(tickettype ticketType, String problemDescription, Employee employee, Asset asset) {
+	public TicketDTO() {
+		super();
+	}
+	
+	public TicketDTO(tickettype ticketType, Employee employee, Asset asset) {
 		super();
 		this.ticketType = ticketType;
-		this.problemDescription = problemDescription;
 		this.employee = employee;
 		this.asset = asset;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "TicketDTO [ticketType=" + ticketType + ", problemDescription=" + problemDescription + ", employee="
-				+ employee + ", asset=" + asset + "]";
+		return "TicketDTO [ticketType=" + ticketType + ", employee=" + employee + ", asset=" + asset + "]";
 	}
 
-	public TicketDTO() {
-		super();
-	}
+	
 
 	
 	
