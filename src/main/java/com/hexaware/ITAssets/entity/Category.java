@@ -25,8 +25,11 @@ public class Category {
 	@Column(name="category_name")
 	private String categoryName;
 	
-	@Column(name="quantity")
-	private int quantity;
+	@Column(name="total_quantity")
+	private int totalQuantity;
+	
+	@Column(name="available_quantity")
+	private int availableQuantity;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="category_type")
@@ -35,18 +38,24 @@ public class Category {
 	public Category() {
 		super();
 	}
+	
+	
 
-	public Category(Long categoryId, String categoryName, int quantity, type categoryType) {
+	public Category(Long categoryId, String categoryName, int totalQuantity, int availableQuantity, type categoryType) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
-		this.quantity = quantity;
+		this.totalQuantity = totalQuantity;
+		this.availableQuantity = availableQuantity;
 		this.categoryType = categoryType;
 	}
+
+
 
 	public Long getCategoryId() {
 		return categoryId;
 	}
+	
 
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
@@ -60,12 +69,20 @@ public class Category {
 		this.categoryName = categoryName;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getTotalQuantity() {
+		return totalQuantity;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setTotalQuantity(int totalQuantity) {
+		this.totalQuantity = totalQuantity;
+	}
+
+	public int getAvailableQuantity() {
+		return availableQuantity;
+	}
+
+	public void setAvailableQuantity(int availableQuantity) {
+		this.availableQuantity = availableQuantity;
 	}
 
 	public type getCategoryType() {
@@ -78,9 +95,11 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", quantity=" + quantity
-				+ ", categoryType=" + categoryType + "]";
+		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", totalQuantity="
+				+ totalQuantity + ", availableQuantity=" + availableQuantity + ", categoryType=" + categoryType + "]";
 	}
+
+
 	
 	
 	
