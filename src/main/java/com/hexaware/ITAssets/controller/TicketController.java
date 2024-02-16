@@ -1,7 +1,11 @@
 package com.hexaware.ITAssets.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,5 +38,12 @@ public class TicketController {
 	{
 		return ticketService.approveTicket(ticketId);
 		
+	}
+	
+	@GetMapping("/status/{status}")
+	public ResponseEntity<List<Ticket>> getTicketsByStatus(@PathVariable String status) 
+	{
+	    List<Ticket> tickets = ticketService.getTicketsByStatus(status);
+	    return ResponseEntity.ok(tickets);
 	}
 }

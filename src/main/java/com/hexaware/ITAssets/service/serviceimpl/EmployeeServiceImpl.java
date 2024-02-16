@@ -1,5 +1,7 @@
 package com.hexaware.ITAssets.service.serviceimpl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +31,52 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		return employee;
 	}
+
+	@Override
+	public List<Employee> getAllEmployee() {
+		// TODO Auto-generated method stub
+		List<Employee>employeelist=employeeRepository.findAll();
+		return employeelist;
+	}
+
+	@Override
+	public Employee updateEmployeeById(Long employeeId, Employee updatedEmployee) {
+		// TODO Auto-generated method stub
+		Optional<Employee> existingEmployee=employeeRepository.findById(employeeId);
+		
+		 if (existingEmployee.isEmpty()) {
+	           return null;
+	        }
+		
+		Employee employee=null;
+		employee=existingEmployee.get();
+		
+		employee.setFirstName(updatedEmployee.getFirstName());
+		employee.setDepartment(updatedEmployee.getDepartment());
+		employee.setDesignation(updatedEmployee.getDesignation());
+		employee.setEmail(updatedEmployee.getEmail());
+		employee.setLastName(updatedEmployee.getLastName());
+		employee.setPassword(updatedEmployee.getPassword());
+		employee.setPhone(updatedEmployee.getPhone());
+		
+		return employee;
+	}
+
+	@Override
+	public void deleteEmployeeById(Long employeeId) {
+		// TODO Auto-generated method stub
+		
+		employeeRepository.deleteById(employeeId);
+		
+		
+	}
+
+	@Override
+	public List<Employee> getEmployeesWithIssuedAssets() {
+		// TODO Auto-generated method stub
+		List<Employee>employees=employeeRepository.findEmployeeWithIssueAsset("ISSUE");
+		return employees;
+	}
+
 	
 }
