@@ -2,6 +2,8 @@ package com.hexaware.ITAssets.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,13 +25,17 @@ public class Asset {
 	@Column(name="asset_id")
 	private Long assetId;
 	
+	@Column(name="model")
 	private String model;
 	
+	@Column(name="description")
 	private String description;
 	
+	@Column(name="image")
 	private String image;
 	
-	private status assetStatus;
+	@Enumerated(EnumType.STRING)
+	private status assetStatus = status.AVAILABLE;
 	
 	@ManyToOne
 	@JoinColumn(name="category_id", referencedColumnName="category_id")

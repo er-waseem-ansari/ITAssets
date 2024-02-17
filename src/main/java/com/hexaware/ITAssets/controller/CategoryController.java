@@ -6,21 +6,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hexaware.ITAssets.dto.CategoryAndAsset;
-import com.hexaware.ITAssets.entity.Asset;
 import com.hexaware.ITAssets.entity.Category;
 import com.hexaware.ITAssets.service.AssetService;
 import com.hexaware.ITAssets.service.CategoryService;
 
 @RestController
 @RequestMapping("/it-assets/api/asset")
-public class CategoryAndAssetController {
+public class CategoryController {
 	
 	@Autowired
 	private CategoryService categoryService;
-	
-	@Autowired
-	private AssetService assetService;
 	
 	
 //	{
@@ -38,13 +33,11 @@ public class CategoryAndAssetController {
 //		  }
 //		}
 	
-	@PostMapping("/add-asset")
-	public void addAssetWithCategory(@RequestBody CategoryAndAsset categoryAndAsset) {
-		
-		Category category =categoryService.addCategory(categoryAndAsset.getCategory());
-		Asset asset = categoryAndAsset.getAsset();
-		asset.setCategory(category);
-		assetService.addAsset(categoryAndAsset.getAsset());
-		
+	@PostMapping("/create-category")
+	public Category createCategory(@RequestBody Category category) {
+		return categoryService.addCategory(category);
 	}
+	
+	
+	
 }
