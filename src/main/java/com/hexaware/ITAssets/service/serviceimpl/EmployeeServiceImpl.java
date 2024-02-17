@@ -41,25 +41,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee updateEmployeeById(Long employeeId, Employee updatedEmployee) {
-		// TODO Auto-generated method stub
-		Optional<Employee> existingEmployee=employeeRepository.findById(employeeId);
-		
-		 if (existingEmployee.isEmpty()) {
-	           return null;
-	        }
-		
-		Employee employee=null;
-		employee=existingEmployee.get();
-		
-		employee.setFirstName(updatedEmployee.getFirstName());
-		employee.setDepartment(updatedEmployee.getDepartment());
-		employee.setDesignation(updatedEmployee.getDesignation());
-		employee.setEmail(updatedEmployee.getEmail());
-		employee.setLastName(updatedEmployee.getLastName());
-		employee.setPassword(updatedEmployee.getPassword());
-		employee.setPhone(updatedEmployee.getPhone());
-		
-		return employee;
+		updatedEmployee.setEmployeeId(employeeId);
+		return employeeRepository.save(updatedEmployee);
+			
 	}
 
 	@Override
@@ -74,8 +58,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public List<Employee> getEmployeesWithIssuedAssets() {
 		// TODO Auto-generated method stub
-		List<Employee>employees=employeeRepository.findEmployeeWithIssueAsset("ISSUE");
-		return employees;
+		List<Employee>employees=employeeRepository.findEmployeeWithIssueAsset();
+		return null;
 	}
 
 	
