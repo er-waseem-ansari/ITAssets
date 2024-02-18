@@ -16,5 +16,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
             "INNER JOIN issued_assets ia ON e.employee_id = ia.employee_id ",
     nativeQuery = true)
 	List<Employee> findEmployeeWithIssueAsset();
-
+//
 }
+// new changes
