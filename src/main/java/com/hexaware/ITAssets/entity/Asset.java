@@ -34,6 +34,7 @@ public class Asset {
 	@Column(name="image")
 	private String image;
 	
+	@Column(name="asset_status")
 	@Enumerated(EnumType.STRING)
 	private status assetStatus = status.AVAILABLE;
 	

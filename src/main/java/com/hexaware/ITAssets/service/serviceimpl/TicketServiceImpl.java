@@ -11,6 +11,7 @@ import com.hexaware.ITAssets.entity.Employee;
 import com.hexaware.ITAssets.entity.IssuedAsset;
 import com.hexaware.ITAssets.entity.ReturnedAsset;
 import com.hexaware.ITAssets.entity.Ticket;
+import com.hexaware.ITAssets.repository.AssetRepository;
 import com.hexaware.ITAssets.repository.IssuedAssetRepository;
 import com.hexaware.ITAssets.repository.ReturnedAssetRepository;
 import com.hexaware.ITAssets.repository.TicketRepository;
@@ -27,6 +28,9 @@ public class TicketServiceImpl implements TicketService {
 	
 	@Autowired
 	private ReturnedAssetRepository returnedAssetRepository;
+	
+	@Autowired
+	private AssetRepository assetRepository;
 	
 	@Override
 	public Ticket createTicket(Ticket ticket) {
@@ -52,7 +56,9 @@ public class TicketServiceImpl implements TicketService {
 			
 			
 			ticketRepository.updateTicketStatus(ticket.get().getTicketId(), "RESOLVED");
+			
 			issuedAssetRepository.save(issuedAsset);
+			assetRepository.updateAssetStatusByAssetId(ticket.get().getAsset().getAssetId(),"UNAVAILABLE");
 			message = "ticket has been approved and asset has been issued";
 			
 		}
@@ -72,6 +78,7 @@ public class TicketServiceImpl implements TicketService {
 				returnedAssetRepository.save(returnedAsset);
 				issuedAssetRepository.deleteById(issuedAsset.get().getIssuedAssetsid());
 				ticketRepository.updateTicketStatus(ticket.get().getTicketId(), "RESOLVED");
+				assetRepository.updateAssetStatusByAssetId(ticket.get().getAsset().getAssetId(),"AVAILABLE");
 				
 				message = "return ticket has been approved";
 			}
