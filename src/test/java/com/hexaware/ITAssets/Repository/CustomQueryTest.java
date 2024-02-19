@@ -12,8 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hexaware.ITAssets.entity.Asset;
 import com.hexaware.ITAssets.entity.Employee;
+import com.hexaware.ITAssets.entity.Ticket;
 import com.hexaware.ITAssets.repository.AssetRepository;
 import com.hexaware.ITAssets.repository.EmployeeRepository;
+import com.hexaware.ITAssets.repository.TicketRepository;
 
 @SpringBootTest
 public class CustomQueryTest {
@@ -25,6 +27,9 @@ public class CustomQueryTest {
 	
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private TicketRepository ticketRepository;
 	
 	@Test
 	@Disabled
@@ -47,6 +52,15 @@ public class CustomQueryTest {
 		Employee e=null;
 		e=employee.get();
 		System.out.println("Employee details are: "+e);
+	}
+	
+	@Test
+	@Disabled
+	void getAllTickets()
+	{
+		List<Ticket>tickets=ticketRepository.findAll();
+		
+		System.out.println("list of tickets are: "+tickets);
 	}
 
 }
