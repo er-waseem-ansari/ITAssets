@@ -36,7 +36,7 @@ public class Asset {
 	
 	@Column(name="asset_status")
 	@Enumerated(EnumType.STRING)
-	private status assetStatus;
+	private status assetStatus = status.AVAILABLE;
 	
 	@ManyToOne
 	@JoinColumn(name="category_id", referencedColumnName="category_id")
