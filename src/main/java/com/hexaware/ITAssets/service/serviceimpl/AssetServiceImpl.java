@@ -36,6 +36,8 @@ public class AssetServiceImpl implements AssetService {
 	public Asset addAsset(Asset asset) {
 		Asset savedAsset =  assetRepository.save(asset);
 		categoryRepository.updateCategoryQuantityById(savedAsset.getCategory().getCategoryId(), 1, 1);
+		savedAsset.getCategory().setAvailableQuantity(savedAsset.getCategory().getAvailableQuantity()+1);
+		savedAsset.getCategory().setTotalQuantity(savedAsset.getCategory().getTotalQuantity()+1);
 		return savedAsset;
 	}
 	
