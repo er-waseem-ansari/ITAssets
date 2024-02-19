@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ import com.hexaware.ITAssets.service.AssetService;
 
 @Service
 public class AssetServiceImpl implements AssetService {
+	
+	
+	private static final Logger logger = LoggerFactory.getLogger(AssetServiceImpl.class);
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -46,6 +51,7 @@ public class AssetServiceImpl implements AssetService {
 		{
 			throw new AssetNotFoundException("asset not found by id");
 		}
+		logger.info("asset details are:"+asset);
 		return asset;
 	}
 
@@ -69,6 +75,7 @@ public class AssetServiceImpl implements AssetService {
 		{ 
 			assetDTOList.add(modelMapper.map(asset, AssetDTO.class));
 		}
+		logger.info("list of avialable assets: "+assetDTOList);
 		return assetDTOList;
 	}
 

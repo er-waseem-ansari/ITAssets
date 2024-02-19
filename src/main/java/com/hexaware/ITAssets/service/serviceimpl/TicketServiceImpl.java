@@ -3,6 +3,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ import com.hexaware.ITAssets.service.TicketService;
 @Service
 public class TicketServiceImpl implements TicketService {
 	
+	private static final Logger logger = LoggerFactory.getLogger(TicketServiceImpl.class);
+	
 	@Autowired
 	private TicketRepository ticketRepository;
 	
@@ -36,6 +40,7 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public Ticket createTicket(Ticket ticket) {
 		ticket.setTicketStatus(Ticket.status.IN_PROCESS);
+		logger.info("ticket has been created successfully");
 		return ticketRepository.save(ticket);
 	}
 
@@ -47,6 +52,7 @@ public class TicketServiceImpl implements TicketService {
 		if(ticket.isEmpty())
 		{
 			throw new TicketNotFoundException("ticket id not found");
+			
 		}
 		
 		
@@ -65,6 +71,7 @@ public class TicketServiceImpl implements TicketService {
 			issuedAssetRepository.save(issuedAsset);
 			assetRepository.updateAssetStatusByAssetId(ticket.get().getAsset().getAssetId(),"UNAVAILABLE");
 			message = "ticket has been approved and asset has been issued";
+			logger.info("asset has been issued with respective ticket");
 			
 		}
 		
@@ -86,6 +93,7 @@ public class TicketServiceImpl implements TicketService {
 				assetRepository.updateAssetStatusByAssetId(ticket.get().getAsset().getAssetId(),"AVAILABLE");
 				
 				message = "return ticket has been approved";
+				logger.info("asset has been returned successfully");
 			}
 		}
 		
@@ -96,6 +104,7 @@ public class TicketServiceImpl implements TicketService {
 	public List<Ticket> getTicketsByStatus(String status) {
 		// TODO Auto-generated method stub
 		 List<Ticket> tickets = ticketRepository.findByStatus(status);
+		 logger.info("list of ticket by status:IN_PROCESS,ASSIGN,RETURNED");
 		return tickets;
 	}
 

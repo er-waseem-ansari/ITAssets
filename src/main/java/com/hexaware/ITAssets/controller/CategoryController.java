@@ -1,6 +1,7 @@
 package com.hexaware.ITAssets.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +35,9 @@ public class CategoryController {
 //		}
 	
 	@PostMapping("/create-category")
-	public Category createCategory(@RequestBody Category category) {
-		return categoryService.addCategory(category);
+	public ResponseEntity<Category> createCategory(@RequestBody Category category) {
+		
+		return ResponseEntity.ok().body(categoryService.addCategory(category));
 	}
 	
 	

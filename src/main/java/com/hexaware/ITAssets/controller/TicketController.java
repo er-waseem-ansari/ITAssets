@@ -23,10 +23,10 @@ public class TicketController {
 	private TicketService ticketService;
 	
 	@PostMapping("/raise-ticket")
-	public Ticket createTicket(@RequestBody Ticket ticket) {
+	public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
 	
 		System.out.println(ticket);
-		return ticketService.createTicket(ticket);
+		return ResponseEntity.ok().body(ticketService.createTicket(ticket));
 	}
 	
 	@GetMapping("/raise-ticket/check")

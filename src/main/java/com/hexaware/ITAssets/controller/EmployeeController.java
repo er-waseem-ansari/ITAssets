@@ -3,6 +3,7 @@ package com.hexaware.ITAssets.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,19 +24,22 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 	
 	@PostMapping("/add-employee")
-	public Employee addEmployee(@RequestBody Employee employee) {
-		return employeeService.addEmployee(employee);
+	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+		
+		return ResponseEntity.ok().body(employeeService.addEmployee(employee));
 	}
 	
 	@GetMapping("/get-all-employee")
-	public List<Employee> getAllEmployee()
+	public ResponseEntity<List<Employee>> getAllEmployee()
 	{
-		return employeeService.getAllEmployee();
+		
+		return ResponseEntity.ok().body(employeeService.getAllEmployee());
 	}
 	
 	@GetMapping("/get-employees-byId/{employeeId}")
-    public Employee getEmployeeById(@PathVariable Long employeeId)throws EmployeeNotFoundException {
-        return employeeService.getEmployeeById(employeeId);
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long employeeId)throws EmployeeNotFoundException {
+        
+    	return ResponseEntity.ok(employeeService.getEmployeeById(employeeId));
     }
 	
 	@PutMapping("/update-employee/{employeeId}")

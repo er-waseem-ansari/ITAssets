@@ -1,6 +1,7 @@
 package com.hexaware.ITAssets.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,9 @@ public class ReturnedAssetController {
 	private ReturnedAssetService returnedAssetService;
 	
 	@PostMapping("/return")
-	public ReturnedAsset addToReturnedAsset(@RequestBody ReturnedAsset returnedAsset) {
-		return returnedAssetService.addToReturnedAssets(returnedAsset);
+	public ResponseEntity<ReturnedAsset> addToReturnedAsset(@RequestBody ReturnedAsset returnedAsset) {
+		
+		return ResponseEntity.ok().body(returnedAssetService.addToReturnedAssets(returnedAsset));
 	}
 	
 }
