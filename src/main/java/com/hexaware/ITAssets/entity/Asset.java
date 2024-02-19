@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 @Table(name="assets")
 public class Asset {
 	
-	enum status{
+	public enum status{
 		AVAILABLE,
 		UNAVAILABLE
 	}
@@ -36,7 +36,7 @@ public class Asset {
 	
 	@Column(name="asset_status")
 	@Enumerated(EnumType.STRING)
-	private status assetStatus = status.AVAILABLE;
+	private status assetStatus;
 	
 	@ManyToOne
 	@JoinColumn(name="category_id", referencedColumnName="category_id")

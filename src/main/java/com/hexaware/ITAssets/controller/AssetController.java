@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.ITAssets.Exception.AssetNotFoundException;
 import com.hexaware.ITAssets.dto.AssetDTO;
 import com.hexaware.ITAssets.entity.Asset;
 import com.hexaware.ITAssets.service.AssetService;
@@ -27,6 +28,12 @@ public class AssetController {
 	@PostMapping("/add-asset")
 	public Asset addAsset(@RequestBody Asset asset) {
 		return assetService.addAsset(asset);
+	}
+	
+	@GetMapping("/getById")
+	public Asset getAssetById(@RequestParam Long assetId)throws AssetNotFoundException
+	{
+		return assetService.getAssetById(assetId);
 	}
 	
 	@GetMapping("/get-total-assets")

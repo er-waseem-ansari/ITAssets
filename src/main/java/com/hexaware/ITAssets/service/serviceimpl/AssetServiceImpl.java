@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.ITAssets.Exception.AssetNotFoundException;
 import com.hexaware.ITAssets.dto.AssetDTO;
 import com.hexaware.ITAssets.entity.Asset;
 import com.hexaware.ITAssets.repository.AssetRepository;
@@ -35,12 +36,16 @@ public class AssetServiceImpl implements AssetService {
 	
 
 	@Override
-	public Asset getAssetById(Long assetId) {
+	public Asset getAssetById(Long assetId) throws AssetNotFoundException {
 		Asset asset = null;
 		Optional<Asset> _asset = assetRepository.findById(assetId);
 		if(_asset.isPresent()) {
 			asset = _asset.get();		
 			}
+		else
+		{
+			throw new AssetNotFoundException("asset not found by id");
+		}
 		return asset;
 	}
 

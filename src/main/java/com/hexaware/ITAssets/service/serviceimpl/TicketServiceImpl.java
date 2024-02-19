@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.ITAssets.Exception.TicketNotFoundException;
 import com.hexaware.ITAssets.entity.Asset;
 import com.hexaware.ITAssets.entity.Employee;
 import com.hexaware.ITAssets.entity.IssuedAsset;
@@ -39,10 +40,14 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public String approveTicket(Long ticketId) {
+	public String approveTicket(Long ticketId) throws TicketNotFoundException {
 	
 		String message = "Something went wrong!";
 		Optional<Ticket> ticket=ticketRepository.findById(ticketId); // Exception to be added later
+		if(ticket.isEmpty())
+		{
+			throw new TicketNotFoundException("ticket id not found");
+		}
 		
 		
 		Employee employee=ticket.get().getEmployee();

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.ITAssets.Exception.EmployeeNotFoundException;
 import com.hexaware.ITAssets.entity.Employee;
 import com.hexaware.ITAssets.repository.EmployeeRepository;
 import com.hexaware.ITAssets.service.EmployeeService;
@@ -23,11 +24,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Employee getEmployeeById(Long employeeId) {
+	public Employee getEmployeeById(Long employeeId)throws EmployeeNotFoundException {
 		Employee employee = null;
 		Optional<Employee> _employee =  employeeRepository.findById(employeeId);
 		if(_employee.isPresent()) {
 			employee = _employee.get();
+		}
+		else
+		{
+			throw new EmployeeNotFoundException("employee not found");
 		}
 		return employee;
 	}
@@ -59,7 +64,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<Employee> getEmployeesWithIssuedAssets() {
 		// TODO Auto-generated method stub
 		List<Employee>employees=employeeRepository.findEmployeeWithIssueAsset();
-		return null;
+		
+		return employees;
 	}
 
 	

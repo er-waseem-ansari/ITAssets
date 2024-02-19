@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.ITAssets.Exception.TicketNotFoundException;
 import com.hexaware.ITAssets.entity.Ticket;
 import com.hexaware.ITAssets.service.TicketService;
 
@@ -34,7 +35,7 @@ public class TicketController {
 	}
 	
 	@PostMapping("/approveTicket")
-	public String approveTicket(@RequestParam Long ticketId)
+	public String approveTicket(@RequestParam Long ticketId) throws TicketNotFoundException
 	{
 		return ticketService.approveTicket(ticketId);
 		

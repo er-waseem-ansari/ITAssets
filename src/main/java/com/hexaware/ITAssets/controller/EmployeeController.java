@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.ITAssets.Exception.EmployeeNotFoundException;
 import com.hexaware.ITAssets.entity.Employee;
 import com.hexaware.ITAssets.service.EmployeeService;
 
@@ -32,8 +33,8 @@ public class EmployeeController {
 		return employeeService.getAllEmployee();
 	}
 	
-	@GetMapping("/employees/{employeeId}")
-    public Employee getEmployeeById(@PathVariable Long employeeId) {
+	@GetMapping("/get-employees-byId/{employeeId}")
+    public Employee getEmployeeById(@PathVariable Long employeeId)throws EmployeeNotFoundException {
         return employeeService.getEmployeeById(employeeId);
     }
 	
@@ -43,7 +44,7 @@ public class EmployeeController {
     }
 	
 
-    @DeleteMapping("/employees/{employeeId}")
+    @DeleteMapping("/delete-employees/{employeeId}")
     public String deleteEmployeeById(@PathVariable Long employeeId) {
         employeeService.deleteEmployeeById(employeeId);
         return "Employee deleted successfully";
