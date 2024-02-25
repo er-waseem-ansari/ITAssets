@@ -12,7 +12,7 @@ import com.hexaware.ITAssets.service.AssetService;
 import com.hexaware.ITAssets.service.CategoryService;
 
 @RestController
-@RequestMapping("/it-assets/api/asset")
+@RequestMapping("/category")
 public class CategoryController {
 	
 	@Autowired
@@ -34,7 +34,7 @@ public class CategoryController {
 //		  }
 //		}
 	
-	@PostMapping("/create-category")
+	@PostMapping("/create")
 	public ResponseEntity<Category> createCategory(@RequestBody Category category) {
 		
 		return ResponseEntity.ok().body(categoryService.addCategory(category));

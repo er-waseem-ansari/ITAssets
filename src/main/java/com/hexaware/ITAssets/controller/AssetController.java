@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,43 +22,45 @@ import com.hexaware.ITAssets.service.AssetService;
 
 
 @RestController
-@RequestMapping("/it-assets/api/asset")
+@RequestMapping("/assets")
 public class AssetController {
 	
 	@Autowired
 	private AssetService assetService;
 	
-	@PostMapping("/add-asset")
+	@PostMapping("/add")
 	public ResponseEntity<Asset> addAsset(@RequestBody Asset asset) {
 		
 		return ResponseEntity.ok().body(assetService.addAsset(asset));
 	}
 	
-	@GetMapping("/getById")
-	public ResponseEntity<Asset> getAssetById(@RequestParam Long assetId)throws AssetNotFoundException
+	@GetMapping("/{assetId}")
+	public ResponseEntity<Asset> getAssetById(@PathVariable Long assetId)throws AssetNotFoundException
 	{
 		
 		return ResponseEntity.ok().body(assetService.getAssetById(assetId));
 	}
 	
-	@GetMapping("/get-total-assets")
+
+	@GetMapping("/all")
 	public ResponseEntity<List<AssetDTO>> getTotalAssets(){
 		return ResponseEntity.ok().body(assetService.getTotalAssets());
 	}
 	
-	@GetMapping("/get-available-assets")
+	@GetMapping("/available")
 	public ResponseEntity<List<AssetDTO>> getAvailableAssets(){
 		return ResponseEntity.ok().body(assetService.getAvailableAssets());
 	}
 	
-	@GetMapping("/get-available-assets-by-category")
-	public ResponseEntity<List<AssetDTO>> getAvailableAssetsByCategoryId(@RequestParam Long categoryId){
+	@GetMapping("/category/{categoryId}")
+	public ResponseEntity<List<AssetDTO>> getAvailableAssetsByCategoryId(@PathVariable Long categoryId){
 		
 		return ResponseEntity.ok().body(assetService.getAvailableAssetsByCategoryId(categoryId));
 	}
 	
-	@DeleteMapping("/delete-asset-by-id")
-	public ResponseEntity<String> deleteAssetById(@RequestParam Long assetId) {
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@DeleteMapping("/{assetId}")
+	public ResponseEntity<String> deleteAssetById(@PathVariable Long assetId) {
 		String message = "Asset not deleted";
 		if(assetService.deleteAssetById(assetId)) {
 			message = "Asset deleted";

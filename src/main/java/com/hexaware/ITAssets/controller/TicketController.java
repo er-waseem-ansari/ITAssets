@@ -17,24 +17,21 @@ import com.hexaware.ITAssets.entity.Ticket;
 import com.hexaware.ITAssets.service.TicketService;
 
 @RestController
+@RequestMapping("/tickets")
 public class TicketController {
 	
 	@Autowired
 	private TicketService ticketService;
 	
-	@PostMapping("/raise-ticket")
+	@PostMapping("/raise")
 	public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
 	
 		System.out.println(ticket);
 		return ResponseEntity.ok().body(ticketService.createTicket(ticket));
 	}
 	
-	@GetMapping("/raise-ticket/check")
-	public String check() {
-		return "Working";
-	}
 	
-	@PostMapping("/approveTicket")
+	@PostMapping("/approve")
 	public String approveTicket(@RequestParam Long ticketId) throws TicketNotFoundException
 	{
 		return ticketService.approveTicket(ticketId);

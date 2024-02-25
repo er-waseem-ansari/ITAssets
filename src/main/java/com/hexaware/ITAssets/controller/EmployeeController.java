@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,43 +19,47 @@ import com.hexaware.ITAssets.entity.Employee;
 import com.hexaware.ITAssets.service.EmployeeService;
 
 @RestController
+@RequestMapping("/employees")
 public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService employeeService;
-	
-	@PostMapping("/add-employee")
-	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-		
-		return ResponseEntity.ok().body(employeeService.addEmployee(employee));
-	}
-	
-	@GetMapping("/get-all-employee")
+//	
+//	@PostMapping("/add-employee")
+//	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+//		
+//		return ResponseEntity.ok().body(employeeService.addEmployee(employee));
+//	}
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@GetMapping("/all")
 	public ResponseEntity<List<Employee>> getAllEmployee()
 	{
 		
 		return ResponseEntity.ok().body(employeeService.getAllEmployee());
 	}
 	
-	@GetMapping("/get-employees-byId/{employeeId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@GetMapping("/{employeeId}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long employeeId)throws EmployeeNotFoundException {
         
     	return ResponseEntity.ok(employeeService.getEmployeeById(employeeId));
     }
 	
-	@PutMapping("/update-employee/{employeeId}")
+	
+	@PutMapping("/{employeeId}")
     public Employee updateEmployeeById(@PathVariable Long employeeId, @RequestBody Employee updatedEmployee) {
         return employeeService.updateEmployeeById(employeeId, updatedEmployee);
     }
 	
-
-    @DeleteMapping("/delete-employees/{employeeId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+    @DeleteMapping("/{employeeId}")
     public String deleteEmployeeById(@PathVariable Long employeeId) {
         employeeService.deleteEmployeeById(employeeId);
         return "Employee deleted successfully";
     }
     
-    @GetMapping("/employees/issued-assets")
+	@PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/issued")
     public List<Employee> getEmployeesWithIssuedAssets() {
         return employeeService.getEmployeesWithIssuedAssets();
                

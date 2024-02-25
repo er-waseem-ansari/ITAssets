@@ -1,58 +1,59 @@
 package com.hexaware.ITAssets.entity;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-//import lombok.ToString;
-
 @Entity
-//@Data
-//
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@ToString
-@Table(name="employees")
-public class Employee {
+@Table(name = "employees")
+public class Employee implements UserDetails {
+
 	@Id
-	@Column(name="employee_id")
+	@Column(name = "employee_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long employeeId;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
-	@Column(name="designation")
+
+	@Column(name = "designation")
 	private String designation;
-	
-	@Column(name="department")
+
+	@Column(name = "department")
 	private String department;
-	
-	@Column(name="phone")
+
+	@Column(name = "phone")
 	private String phone;
-	
+
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	public Employee() {
 		super();
 	}
 
 	public Employee(Long employeeId, String firstName, String lastName, String email, String password,
-			String designation, String department, String phone) {
+			String designation, String department, String phone, Role role) {
 		super();
 		this.employeeId = employeeId;
 		this.firstName = firstName;
@@ -62,6 +63,7 @@ public class Employee {
 		this.designation = designation;
 		this.department = department;
 		this.phone = phone;
+		this.role = role;
 	}
 
 	public Long getEmployeeId() {
@@ -96,14 +98,6 @@ public class Employee {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getDesignation() {
 		return designation;
 	}
@@ -128,13 +122,58 @@ public class Employee {
 		this.phone = phone;
 	}
 
-	@Override
-	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", password=" + password + ", designation=" + designation + ", department=" + department
-				+ ", phone=" + phone + "]";
+	public Role getRole() {
+		return role;
 	}
-	
-	
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return List.of(new SimpleGrantedAuthority(this.role.toString()));
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.password;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }
-//
