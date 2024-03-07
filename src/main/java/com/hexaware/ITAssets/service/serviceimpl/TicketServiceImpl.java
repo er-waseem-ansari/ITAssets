@@ -102,7 +102,6 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public List<Ticket> getTicketsByStatus(String status) {
-		// TODO Auto-generated method stub
 		 List<Ticket> tickets = ticketRepository.findByStatus(status);
 		 logger.info("list of ticket by status:IN_PROCESS,ASSIGN,RETURNED");
 		return tickets;

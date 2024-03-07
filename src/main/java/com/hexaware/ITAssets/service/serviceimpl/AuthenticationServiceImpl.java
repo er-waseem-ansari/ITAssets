@@ -36,7 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 		// TODO Auto-generated method stub
 		employee.setPassword(passwordEncoder.encode(employee.getPassword()));
 		String jwtToken =  jwtService.generateToken(employeeRepository.save(employee));
-		LoginResponseDTO response = new LoginResponseDTO(jwtToken, employee.getUsername(), employee.getRole());
+		LoginResponseDTO response = new LoginResponseDTO(jwtToken, employee.getEmail(), employee.getRole(), employee.getFirstName(), employee.getLastName(), employee.getEmployeeId());
 		return response;
 	}
 
@@ -49,7 +49,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 			throw new IllegalArgumentException("Invalid email or password");
 		}
 		String jwtToken = jwtService.generateToken(employeeOptional.get());
-		LoginResponseDTO response = new LoginResponseDTO(jwtToken, employeeOptional.get().getEmail(), employeeOptional.get().getRole());
+		LoginResponseDTO response = new LoginResponseDTO(jwtToken, employeeOptional.get().getEmail(), employeeOptional.get().getRole(), employeeOptional.get().getFirstName(), employeeOptional.get().getLastName(), employeeOptional.get().getEmployeeId());
 		return response;
 	}
 

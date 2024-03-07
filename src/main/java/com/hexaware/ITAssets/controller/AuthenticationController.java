@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hexaware.ITAssets.dto.LoginRequestDTO;
 import com.hexaware.ITAssets.dto.LoginResponseDTO;
 import com.hexaware.ITAssets.entity.Employee;
+import com.hexaware.ITAssets.entity.Role;
 import com.hexaware.ITAssets.service.AuthenticationService;
 
 
@@ -24,6 +25,7 @@ public class AuthenticationController {
 	
     @PostMapping("/signup")
     public ResponseEntity<LoginResponseDTO> signup(@RequestBody Employee employee) {
+//    	employee.setRole(Role.USER);
         return ResponseEntity.ok(authenticationService.signup(employee));
     }
 
