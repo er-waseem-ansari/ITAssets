@@ -25,7 +25,10 @@ public class AuthenticationController {
 	
     @PostMapping("/signup")
     public ResponseEntity<LoginResponseDTO> signup(@RequestBody Employee employee) {
-//    	employee.setRole(Role.USER);
+    	if(employee.getRole()==null) {
+    		employee.setRole(Role.USER);
+    	}
+    	
         return ResponseEntity.ok(authenticationService.signup(employee));
     }
 
