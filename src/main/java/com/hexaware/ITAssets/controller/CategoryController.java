@@ -45,7 +45,7 @@ public class CategoryController {
 		return ResponseEntity.ok().body(categoryService.addCategory(category));
 	}
 	
-	@GetMapping("/getcategory")
+	@GetMapping("/all")
 	public ResponseEntity<List<Category>> getAllCategory()
 	{
 		return ResponseEntity.ok().body(categoryService.getAllCategory());

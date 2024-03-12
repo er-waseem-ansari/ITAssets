@@ -1,5 +1,6 @@
 package com.hexaware.ITAssets.entity;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -137,7 +138,13 @@ public class Employee implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return List.of(new SimpleGrantedAuthority(this.role.toString()));
+//		return List.of(new SimpleGrantedAuthority(this.role.toString()));
+		if (this.role != null) {
+	        return List.of(new SimpleGrantedAuthority(this.role.toString()));
+	    } else {
+	        // If role is null, return an empty list of authorities
+	        return Collections.emptyList();
+	    }
 	}
 
 	@Override

@@ -33,12 +33,12 @@ public class AssetServiceImpl implements AssetService {
 	private CategoryRepository categoryRepository;
 
 	@Override
-	public Asset addAsset(Asset asset) {
+	public boolean addAsset(Asset asset) {
 		Asset savedAsset =  assetRepository.save(asset);
 		categoryRepository.updateCategoryQuantityById(savedAsset.getCategory().getCategoryId(), 1, 1);
 		savedAsset.getCategory().setAvailableQuantity(savedAsset.getCategory().getAvailableQuantity()+1);
 		savedAsset.getCategory().setTotalQuantity(savedAsset.getCategory().getTotalQuantity()+1);
-		return savedAsset;
+		return true;
 	}
 	
 

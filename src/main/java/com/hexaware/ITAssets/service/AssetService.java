@@ -7,7 +7,7 @@ import com.hexaware.ITAssets.dto.AssetDTO;
 import com.hexaware.ITAssets.entity.Asset;
 
 public interface AssetService {
-	public Asset addAsset(Asset asset);
+	public boolean addAsset(Asset asset);
 	public Asset getAssetById(Long assetId)throws AssetNotFoundException;
 	public List<AssetDTO> getTotalAssets();
 	public List<AssetDTO> getAvailableAssets();

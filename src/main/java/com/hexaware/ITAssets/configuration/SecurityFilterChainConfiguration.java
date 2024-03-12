@@ -42,12 +42,12 @@ public class SecurityFilterChainConfiguration {
 	 @Bean
 	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	        http.csrf(AbstractHttpConfigurer::disable)
-	        .cors(AbstractHttpConfigurer::disable)
+//	        .cors(AbstractHttpConfigurer::disable)
 	                .authorizeHttpRequests((requestMatcher)-> 
 					requestMatcher.requestMatchers("/auth/login").permitAll()
 					  .requestMatchers("/auth/signup").permitAll()
 					  .requestMatchers("/auth/check").hasAuthority("ADMIN")
-					  .requestMatchers("/assets/add").hasAuthority("ADMIN")
+//					  .requestMatchers("/assets/add").hasAuthority("ADMIN")
 					  .requestMatchers("/assets/all").hasAuthority("ADMIN")
 					  .anyRequest().permitAll())
 	                

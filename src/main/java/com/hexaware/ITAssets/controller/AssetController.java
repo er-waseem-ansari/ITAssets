@@ -30,7 +30,7 @@ public class AssetController {
 	private AssetService assetService;
 	
 	@PostMapping("/add")
-	public ResponseEntity<Asset> addAsset(@RequestBody Asset asset) {
+	public ResponseEntity<Boolean> addAsset(@RequestBody Asset asset) {
 		
 		return ResponseEntity.ok().body(assetService.addAsset(asset));
 	}
