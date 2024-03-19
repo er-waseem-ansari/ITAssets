@@ -33,9 +33,10 @@ public class TicketController {
 	}
 	
 	
-	@PostMapping("/approve")
-	public String approveTicket(@RequestParam Long ticketId) throws TicketNotFoundException
+	@PostMapping("/approve/{ticketId}")
+	public String approveTicket(@PathVariable Long ticketId) throws TicketNotFoundException
 	{
+		System.out.println("ticket id recieved: " + ticketId);
 		return ticketService.approveTicket(ticketId);
 		
 	}
@@ -44,6 +45,14 @@ public class TicketController {
 	public ResponseEntity<List<Ticket>> getTicketsByStatus(@PathVariable String status) 
 	{
 	    List<Ticket> tickets = ticketService.getTicketsByStatus(status);
+	    return ResponseEntity.ok(tickets);
+	}
+	
+	@GetMapping("/employee/{employeeId}")
+	public ResponseEntity<List<Ticket>> getTicketsByEmployeeId(@PathVariable Long employeeId) 
+	{
+		System.out.println("Inside get ticket by employee id and emp id is : " + employeeId);
+	    List<Ticket> tickets = ticketService.getTicketsByEmployeeId(employeeId);
 	    return ResponseEntity.ok(tickets);
 	}
 }

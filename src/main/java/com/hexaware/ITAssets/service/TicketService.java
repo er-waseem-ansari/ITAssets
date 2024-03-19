@@ -14,5 +14,7 @@ public interface TicketService {
 
 	public List<Ticket> getTicketsByStatus(String status);
 
+	public List<Ticket> getTicketsByEmployeeId(Long employeeId);
+
 	
 }

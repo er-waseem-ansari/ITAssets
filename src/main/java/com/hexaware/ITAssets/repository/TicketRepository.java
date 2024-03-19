@@ -20,4 +20,7 @@ public interface TicketRepository extends JpaRepository<Ticket,Long>{
 
 	@Query(value="Select * from tickets where ticket_status= :status",nativeQuery=true)
 	public List<Ticket> findByStatus(String status);
+
+	@Query(value="Select * from tickets where employee_id = :employeeId",nativeQuery=true)
+	public List<Ticket> findByEmployeeId(Long employeeId);
 }
