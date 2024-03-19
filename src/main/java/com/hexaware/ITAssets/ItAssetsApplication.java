@@ -8,5 +8,7 @@ public class ItAssetsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ItAssetsApplication.class, args);
+		
+		//tejas rai
 	}
 }
